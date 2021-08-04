@@ -1,6 +1,6 @@
 main .cart-game {
     width: 70rem;
-    height: 25rem;
+    height: 29rem;
     /* background-color: rgb(236, 119, 119); */
     background-color: #FFF;
     border-radius: .625rem;
@@ -18,10 +18,10 @@ main .cart-game .elements {
     flex-direction: column;
     align-items: center;
     justify-content: space-between;
-    /* background-color: aqua; */
-    height: 63%;
+    height: 68%;
 }
 main .cart-game .total {
+    margin-top: 1rem;
     display: flex; 
     justify-content: center;
     align-items: center;
@@ -30,10 +30,12 @@ main .cart-game .total {
 main .cart-game .total h2 {
     font-size: 1.5rem;
     margin-right: .5rem;
+    font-weight: 500;
 }
 
 main .cart-game .total p {
     font-size: 1.5rem;
+    font-weight: 300;
 }
 
 main .cart-game  button {
@@ -57,4 +59,75 @@ main .cart-game  button {
 
 main .cart-game button img {
    margin-left: 1rem;
+}
+
+main .cart-game .items {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    overflow-y: scroll;
+}
+
+main .cart-game .items .item {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    margin-top: 1rem;
+}
+
+main .cart-game .items .item img {
+    margin-left: 1rem;
+}
+
+main .cart-game .items .item .game-item {
+    margin-left: 1rem;
+    width: 33.3rem;
+    width: 60%;
+}
+
+main .cart-game .items .item .game-item .game-numbers, .price-game, .type-game {
+    margin-left: .5rem;
+}
+
+main .cart-game .items .item .game-item.lotofacil {
+    border-left: 2px solid #7F3992;
+}
+
+main .cart-game .items .item .game-item.megasena {
+    border-left: 2px solid #01AC66;
+}
+
+main .cart-game .items .item .game-item.lotomania {
+    border-left: 2px solid #F79C31;
+}
+
+main .cart-game .items .item .game-item .type-game.lotomania {
+    color: #F79C31;
+}
+
+main .cart-game .items .item .game-item .type-game.lotofacil {
+    color: #7F3992;
+}
+
+main .cart-game .items .item .game-item .type-game.megasena {
+    color: #01AC66;
+}
+
+
+
+main .cart-game .items .item .game-item .game-numbers{
+    width: 100%;
+    font-size: .6rem;
+    font-weight: 500;
+    color: #868686;
+}
+
+main .cart-game .items .item .game-item .type-game, .price-game{
+    font-size: .8rem;
+    font-weight: 500;
+}
+
+main .cart-game .items .item .game-item .price-game {
+    color: #868686;
 }
