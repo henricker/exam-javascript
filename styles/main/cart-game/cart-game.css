@@ -135,9 +135,15 @@ main .cart-game .items .item .game-item .price-game {
 @media screen and (max-width: 1100px) {
    
     main .cart-game {
-        margin-bottom: 10rem;
+        margin-bottom: 7rem;
         width: 40rem;
         height: 30rem;
     }
 
+}
+
+@media screen and (max-width: 668px) {
+    main .cart-game {
+       width: 80%;
+    }
 }

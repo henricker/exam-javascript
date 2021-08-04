@@ -17,16 +17,33 @@ main {
     main {
         flex-direction: column;
         align-items: center;
+        align-items: center;
         justify-content: space-between;
         height: 80rem;
     }
 
 }
 
-@media screen and (max-width: 1085px) {
-   
-    
+@media screen and (max-width: 576px) {
+    main {
+        height: 90rem;
+    }
 }
+
+@media screen and (max-width: 480px) {
+    main {
+        height: 100rem;
+    }
+}
+
+@media screen and (max-width: 384px) {
+    main {
+        height: 110rem;
+    }
+}
+
+
+
 
 
 

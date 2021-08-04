@@ -1,6 +1,5 @@
 .game-panel {
     padding-top: 1.5rem;
- 
 }
 .game-panel .title-game {
     display: flex;
@@ -27,6 +26,7 @@
 
 .game-panel .choose-game .mode {
     margin-bottom: 2.25rem;
+    display: flex;
 }
 
 /* Buttons */
@@ -98,7 +98,6 @@
 .game-panel .numbers {
     display: flex;
     align-items: center;
-
     flex-wrap: wrap;
     margin-bottom: .7rem;
 }
@@ -170,3 +169,89 @@
     color: #FFF;
     background-color: #F79C31;
 }
+
+@media screen and (max-width: 1100px) {
+
+    .game-panel {
+    
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .choose-game {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .rules {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .game {
+        width: 100%;
+     
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .game .numbers button {
+        margin-right: 0;
+        margin-left: 2rem;
+    }
+
+    .game .controls {
+        width: 100%;
+    }
+
+    .game .controls .cart-button {
+        margin-right: 0;
+    }
+}
+
+@media screen and (max-width: 628px) {
+
+    .game-panel .controls {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .game-panel .controls button {
+        padding: .3rem 1.5rem;
+        font-size: .7rem;
+    }
+
+    .game-panel .controls .cart-button {
+      margin-top: .4rem;
+    } 
+}
+
+
+
+@media screen and (max-width: 482px) {
+
+    .game-panel .choose-game .mode {
+        flex-direction: column;
+    }
+
+    .game-panel .choose-game .mode button {
+        margin-bottom: .4rem;
+    }
+}
+
+@media screen and (max-width: 359px) {
+    .game-panel .title-game {
+        flex-direction: column;
+    }
+}
+
+
