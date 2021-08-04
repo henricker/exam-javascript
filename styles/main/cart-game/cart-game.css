@@ -1,0 +1,60 @@
+main .cart-game {
+    width: 70rem;
+    height: 25rem;
+    /* background-color: rgb(236, 119, 119); */
+    background-color: #FFF;
+    border-radius: .625rem;
+
+    position: relative;
+}
+
+main .cart-game .title-cart{
+    margin-top: 1.5rem;
+    margin-left: 1.1875rem;
+}
+
+main .cart-game .elements {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    /* background-color: aqua; */
+    height: 63%;
+}
+main .cart-game .total {
+    display: flex; 
+    justify-content: center;
+    align-items: center;
+}
+
+main .cart-game .total h2 {
+    font-size: 1.5rem;
+    margin-right: .5rem;
+}
+
+main .cart-game .total p {
+    font-size: 1.5rem;
+}
+
+main .cart-game  button {
+    width: 100%;
+    border: 1px solid #e2e2e2;
+    cursor: pointer;
+    height: 6rem;
+
+    position: absolute;
+    bottom: 0;
+    left: 0;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
+    font-size: 2.1875rem;
+    color: #27C383;
+    font-weight: 500;
+}
+
+main .cart-game button img {
+   margin-left: 1rem;
+}

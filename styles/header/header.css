@@ -1,0 +1,85 @@
+header {
+    margin-top: 0.9375rem;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+
+    font-weight: 500;
+    margin-bottom: 2.5rem;
+}
+
+header {
+    border-bottom: 2px solid #EBEBEB;
+}
+
+header .title-right {
+    margin-right: 8.8125rem;
+}
+
+header .title-left {
+    margin-left: 8.8125rem;
+}
+
+header .titles {
+    display: flex;
+    align-items: center;
+}
+
+header .menu-icon {
+    display: none;
+}
+
+header .title-left p {
+    margin-left: 4.625rem;
+    font-size: 1.25rem;
+}
+
+header .title-right p:first-child {
+    margin-right: 2.5rem;
+    font-size: 1.25rem;
+}
+
+header .title-right p:last-child {
+    display: flex;
+    align-items: center;
+    font-size: 1.25rem;
+}
+
+header .title-right p:last-child img {
+    margin-left: 0.625rem;
+}
+
+header .title-left h1 {
+   font-size: 2.75rem;
+   border-bottom: 4px solid #B5C401;
+}
+
+@media screen and (max-width: 720px ) {
+    header {
+      
+    }
+    header .title-left p {
+        display: none;
+    }
+
+    header .title-right {
+        display: none;
+    }
+
+    header .menu-icon {
+        display: block;
+        margin-right: 8.8125rem;
+    }
+}
+
+@media screen and (max-width: 541px ) {
+
+    header .title-left {
+        margin-left: 4rem;
+    }
+
+    header .menu-icon {
+        margin-right: 4rem;
+    }
+}

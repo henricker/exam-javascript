@@ -1,0 +1,75 @@
+@import url(./game-panel/game-panel.css);
+@import url(./cart-game/cart-game.css);
+
+
+main {
+    margin: 0 auto;
+    width: 80%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+/* Cart game */
+
+@media screen and (max-width: 1024px) {
+    main {
+        flex-direction: column;
+        align-items: center;
+        justify-content: space-between;
+        height: 100rem;
+    }
+
+    main .game-panel .title-game {
+        justify-content: center;
+        margin-bottom: 1rem;
+    }
+
+    main .game-panel .choose-game {
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+        margin-bottom: 1rem;
+    }
+
+    main .rules  {
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+        margin-bottom: 1rem;
+    }
+
+}
+
+@media screen and (max-width: 1085px) {
+    main .game-panel .title-game h2 {
+        font-size: 1.2rem;
+        
+    }
+    
+    main .game-panel .title-game p {
+        font-size: 1.2rem;
+    }
+
+    main .choose-game p{
+        font-size: 1rem;
+    }
+
+    main .rules p.title-rule {
+        font-size: 1rem;
+    }
+
+    main .rules p.text-rule {
+        font-size: 1.0625rem;
+    }
+    
+    
+
+    main .cart-game .title-cart{
+        margin-top: 1rem;
+    }
+    
+}
+
+
+
