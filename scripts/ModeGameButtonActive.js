@@ -11,11 +11,12 @@
     #numbersDiv;
     #textRule;
     #rulesGame;
-    #typeGameCurrent = "Mega-Sena"; //Inicialmente assim quando iniciamos o site consideremos que o padrão é Mega-Sena;
+    #ruleGameCurrent;
+    #numbersGame;
 
-    //Para não ter muito código duplicado para a lógica de animação, resolvi aplicar um bind na função handlerButtonActivate, assim consigo generalizar e
-    //manter os padrões que queremos com pouco código, lembre-se que ainda passo o contexto do objeto (this) como contextObject.
     onClick() {
+      this.#initialize();
+
       this.#buttonLotoMania.addEventListener(
         "click",
         this.#handlerButtonActivate.bind(
@@ -47,34 +48,46 @@
       buttonsToRemoveActive.forEach((button) =>
         button.classList.remove("active")
       );
+
       const classControlActive = this.classList.value.replace(" ", "-");
+      contextObject.#numbersGame = [];
       contextObject.#activateControlButtons(classControlActive);
 
       contextObject.#activateRules(this.innerHTML);
-      contextObject.#typeGameCurrent = this.innerHTML;
+      contextObject.#ruleGameCurrent = this.innerHTML;
     }
 
     #activateRules(ruleGame) {
-      const ruleGameCurrent = this.#rulesGame.find(
+      const ruleGameCurr = this.#rulesGame.find(
         (rule) => rule.type === ruleGame
       );
-      console.log(ruleGameCurrent);
-      this.#textRule.innerHTML = ruleGameCurrent.description;
-      this.#activateButtonsNumbers(Number.parseInt(ruleGameCurrent.range));
+
+      this.#textRule.innerHTML = ruleGameCurr.description;
+      this.#activateButtonsNumbers(Number.parseInt(ruleGameCurr.range));
     }
 
     #activateButtonsNumbers(range) {
-        this.#numbersDiv.innerHTML = '';
-        
-        for(let i = 1; i <= range; i++) {
-            const button = document.createElement('button');
-            button.setAttribute('data-js', this.#typeGameCurrent);
-            button.value = (i < 10) ? `0${i}` : `${i}`;
-            button.innerHTML = (i < 10) ? `0${i}` : `${i}`;
-            console.log(button);
-            this.#numbersDiv.appendChild(button);
-        }
-        
+      this.#numbersDiv.innerHTML = "";
+
+      for (let i = 1; i <= range; i++) {
+        const button = document.createElement("button");
+        button.setAttribute("data-js", this.#ruleGameCurrent);
+        button.value = i < 10 ? `0${i}` : `${i}`;
+        button.innerHTML = i < 10 ? `0${i}` : `${i}`;
+        button.addEventListener('click', this.#buttonNumberActiveHandler.bind(this, button));
+        this.#numbersDiv.appendChild(button);
+      }
+    }
+
+    #buttonNumberActiveHandler(buttonContext) {
+      const ruleGameCurr = this.#rulesGame.find(
+        (rule) => rule.type === this.#ruleGameCurrent
+      );
+
+      if(this.#numbersGame.length < Number.parseInt(ruleGameCurr['max-number'])) {
+        buttonContext.classList.add('active');
+        this.#numbersGame.push(buttonContext.value);
+      }
     }
 
     #activateControlButtons(activetedClass) {
@@ -126,6 +139,13 @@
     setNumbersDiv(numbersDiv) {
       this.#numbersDiv = numbersDiv;
       return this;
+    }
+
+    #initialize() {
+      this.#numbersGame = [];
+      this.#ruleGameCurrent = "Mega-Sena";
+      this.#activateRules("Mega-Sena");
+      this.#activateControlButtons("megasena-active");
     }
   }
 

@@ -103,7 +103,7 @@
 }
 
 .game-panel .numbers button {
-    padding: .7rem .7rem;
+    padding: .5rem .5rem;
     margin-right: .5rem;
     margin-bottom: .5rem;
     border-radius: 6.25rem;
@@ -137,7 +137,7 @@
     display: flex;
     align-items: center;
     padding: .2rem 2rem;
-    margin-right: 5.7rem;
+    margin-right: 5%;
 }
 
 .game-panel .controls button.lotofacil-active {
