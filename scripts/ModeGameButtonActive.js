@@ -41,6 +41,68 @@
           this
         )
       );
+      this.#completeGameButton.addEventListener(
+        "click",
+        this.#completeGame.bind(this.#completeGameButton, this)
+      );
+      this.#clearGameButton.addEventListener(
+        "click",
+        this.#clearGame.bind(this.#clearGameButton, this)
+      );
+    }
+
+    #completeGame(contextObject) {
+      const ruleGameCurr = contextObject.#getRuleCurrent(
+        contextObject.#ruleGameCurrent
+      );
+
+      if (
+        contextObject.#numbersGame.length ===
+        Number.parseInt(ruleGameCurr["max-number"])
+      )
+        return;
+
+      while (
+        contextObject.#numbersGame.length <
+        Number.parseInt(ruleGameCurr["max-number"])
+      ) {
+        let newNumber = Util.getRandomNumber(
+          1,
+          Number.parseInt(ruleGameCurr.range)
+        );
+        newNumber = newNumber < 10 ? `0${newNumber}` : `${newNumber}`;
+        !contextObject.#numbersGame.some((number) => number === newNumber)
+          ? contextObject.#numbersGame.push(newNumber)
+          : "";
+      }
+
+      let buttonsSelecteds = [];
+      contextObject.#numbersDiv.childNodes.forEach((button) => {
+        contextObject.#numbersGame.some((value) => button.value === value)
+          ? buttonsSelecteds.push(button)
+          : "";
+      });
+
+      buttonsSelecteds.forEach((button) => {
+        !button.classList.contains("active")
+          ? button.classList.add("active")
+          : "";
+      });
+    }
+
+    #clearGame(contextObject) {
+      let buttonsSelecteds = [];
+      contextObject.#numbersDiv.childNodes.forEach((button) => {
+        contextObject.#numbersGame.some((value) => button.value === value)
+          ? buttonsSelecteds.push(button)
+          : "";
+      });
+
+      buttonsSelecteds.forEach((button) => {
+        button.classList.remove("active");
+      });
+
+      contextObject.#numbersGame = [];
     }
 
     #handlerButtonActivate(buttonsToRemoveActive, contextObject) {
@@ -53,14 +115,12 @@
       contextObject.#numbersGame = [];
       contextObject.#activateControlButtons(classControlActive);
 
-      contextObject.#activateRules(this.innerHTML);
       contextObject.#ruleGameCurrent = this.innerHTML;
+      contextObject.#activateRules();
     }
 
-    #activateRules(ruleGame) {
-      const ruleGameCurr = this.#rulesGame.find(
-        (rule) => rule.type === ruleGame
-      );
+    #activateRules() {
+      const ruleGameCurr = this.#getRuleCurrent(this.#ruleGameCurrent);
 
       this.#textRule.innerHTML = ruleGameCurr.description;
       this.#activateButtonsNumbers(Number.parseInt(ruleGameCurr.range));
@@ -74,18 +134,29 @@
         button.setAttribute("data-js", this.#ruleGameCurrent);
         button.value = i < 10 ? `0${i}` : `${i}`;
         button.innerHTML = i < 10 ? `0${i}` : `${i}`;
-        button.addEventListener('click', this.#buttonNumberActiveHandler.bind(this, button));
+        button.addEventListener(
+          "click",
+          this.#buttonNumberActiveHandler.bind(this, button)
+        );
         this.#numbersDiv.appendChild(button);
       }
     }
 
     #buttonNumberActiveHandler(buttonContext) {
-      const ruleGameCurr = this.#rulesGame.find(
-        (rule) => rule.type === this.#ruleGameCurrent
-      );
+      const ruleGameCurr = this.#getRuleCurrent(this.#ruleGameCurrent);
 
-      if(this.#numbersGame.length < Number.parseInt(ruleGameCurr['max-number'])) {
-        buttonContext.classList.add('active');
+      if (buttonContext.classList.contains("active")) {
+        buttonContext.classList.remove("active");
+        this.#numbersGame = this.#numbersGame.filter(
+          (number) => number !== buttonContext.value
+        );
+        return;
+      }
+
+      if (
+        this.#numbersGame.length < Number.parseInt(ruleGameCurr["max-number"])
+      ) {
+        buttonContext.classList.add("active");
         this.#numbersGame.push(buttonContext.value);
       }
     }
@@ -94,6 +165,10 @@
       this.#cartGameButton.classList.value = `cart-button ${activetedClass}`;
       this.#clearGameButton.classList.value = `${activetedClass}`;
       this.#completeGameButton.classList.value = `${activetedClass}`;
+    }
+
+    #getRuleCurrent(ruleGame) {
+      return this.#rulesGame.find((rule) => rule.type === ruleGame);
     }
 
     setButtonLotoFacil(buttonLotoFacil) {
