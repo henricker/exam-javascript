@@ -33,9 +33,9 @@
                 <div class="choose-game">
                     <p>Choose a game</p>
                     <div class="mode">
-                        <button class="lotofacil">LotoFácil</button>
-                        <button class="megasena">Mega-Sena</button>
-                        <button class="lotomania">Lotomania</button>
+                        <button data-js="lotofacil-option" class="lotofacil">LotoFácil</button>
+                        <button data-js="megasena-option" class="megasena active">Mega-Sena</button>
+                        <button data-js="lotomania-option" class="lotomania">Lotomania</button>
                     </div>
                 </div>
                 <div class="rules">
@@ -83,10 +83,10 @@
                     </div>
                     <div class="controls">
                         <div class="events">
-                            <button>Complete game</button>
-                            <button>Clear game</button>
+                            <button data-js="complete-game-button" class="megasena-active">Complete game</button>
+                            <button data-js="clear-game-button" class="megasena-active">Clear game</button>
                         </div>
-                        <button class="cart-button"> <img src="assets/cart-shop.svg"/> Add to cart</button>
+                        <button data-js="cart-game-button" class="cart-button megasena-active"> <img src="assets/cart-shop.svg"/> Add to cart</button>
                     </div>
                 </div>
             </div>
@@ -153,5 +153,7 @@
         </main>
         <footer>Copyright 2020 Luby Software</footer>
     </div>
+
+    <script src="scripts/index.js"></script>
 </body>
 </html>
