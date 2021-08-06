@@ -11,7 +11,6 @@
     const cartGameTotalP = document.querySelector('p[data-js="cart-total"]');
     const cartGameItemsDiv = document.querySelector('div[data-js="cart-items"]');
     const gamePanel = document.querySelector('div[data-js="game-panel"]');
-
     
     function afterRequestHandler(e) {
         
@@ -48,9 +47,6 @@
         .setAjax(new XMLHttpRequest())
         .setGamePanel(gamePanel)
         .request();
-
-    
-
 
 
 })(window, document);

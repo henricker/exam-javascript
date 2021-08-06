@@ -24,6 +24,7 @@
 
             const itemDiv = document.createElement('div');
             itemDiv.classList.value = 'item';
+            itemDiv.setAttribute('data-js', price);
             
             const imgGarbage = document.createElement('img');
             imgGarbage.src='assets/garbage.svg';
@@ -53,6 +54,15 @@
             this.#cartGameItemsDiv.appendChild(itemDiv);
 
             this.#cartGameTotalP.innerHTML = `Total: ${Util.toReal(this.#totalValue)}`;
+
+            imgGarbage.addEventListener('click', this.#onDeleteHandler.bind(imgGarbage, this));
+        }
+
+        #onDeleteHandler(contextObject) {
+            const price = Number.parseFloat(this.parentNode.getAttribute('data-js'));
+            contextObject.#totalValue -= price;
+            contextObject.#cartGameTotalP.innerHTML = `Total: ${Util.toReal(contextObject.#totalValue)}`;
+            this.parentNode.remove();
         }
     }
 
