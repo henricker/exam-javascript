@@ -24,7 +24,7 @@ main {
 
 }
 
-@media screen and (max-width: 576px) {
+@media screen and (max-width: 628px) {
     main {
         height: 90rem;
     }

@@ -1,6 +1,5 @@
 ((window, document) => {
 
-    
     const buttonLotoFacil = document.querySelector('button[data-js="lotofacil-option"]');
     const buttonMegaSena = document.querySelector('button[data-js="megasena-option"]');
     const buttonLotoMania = document.querySelector('button[data-js="lotomania-option"');
@@ -9,18 +8,20 @@
     const cartGameButton = document.querySelector('button[data-js="cart-game-button"]');
     const textRule = document.querySelector('p[data-js="text-rule"]');
     const numbersDiv = document.querySelector('div[data-js="numbers"]');
+    const cartGameTotalP = document.querySelector('p[data-js="cart-total"]');
+    const cartGameItemsDiv = document.querySelector('div[data-js="cart-items"]');
+    const gamePanel = document.querySelector('div[data-js="game-panel"]');
+
     
+    function afterRequestHandler(e) {
+        
+        const typesRules = e.detail['types'];
 
-    const requestRules = new RequestRules();
-    requestRules
-        .setAjax(new XMLHttpRequest())
-        .request();
-
-    //Veja que uma requisição demanda tempo, dessa forma só vamos executar tudo de fato quando passar ao menos 100ms
-    setTimeout(afterRequestHandler, 100);
-      
-    function afterRequestHandler() {
-        const types = requestRules.getTypes();
+        const cartGameControl = new CartGameControl();
+        cartGameControl
+            .setCartGameTotalP(cartGameTotalP)
+            .setCartGameItemsDiv(cartGameItemsDiv)
+            
 
         //Builder pattern
         const modeGameButtonActive = new ModeGameButtonActive();
@@ -32,9 +33,24 @@
             .setClearGameButton(clearGameButton)
             .setCartGameButton(cartGameButton)
             .setTextRule(textRule)
-            .setRulesGame(types)
-            .setNumbersDiv(numbersDiv)            
+            .setRulesGame(typesRules)
+            .setNumbersDiv(numbersDiv)   
+            .setCartGameControl(cartGameControl)        
             .onClick();
     }
+
+    
+    gamePanel.addEventListener('requestFinish', afterRequestHandler);
+ 
+
+    const requestRules = new RequestRules();
+    requestRules
+        .setAjax(new XMLHttpRequest())
+        .setGamePanel(gamePanel)
+        .request();
+
+    
+
+
 
 })(window, document);

@@ -13,6 +13,7 @@
     #rulesGame;
     #ruleGameCurrent;
     #numbersGame;
+    #cartGameControl;
 
     onClick() {
       this.#initialize();
@@ -49,6 +50,23 @@
         "click",
         this.#clearGame.bind(this.#clearGameButton, this)
       );
+      this.#cartGameButton.addEventListener(
+        "click",
+        this.#cartGame.bind(this.#cartGameButton, this)
+      );
+    }
+    
+    #cartGame(contextObject) {
+
+      const ruleCurrent = contextObject.#getRuleCurrent(contextObject.#ruleGameCurrent);
+
+      if(contextObject.#numbersGame.length < ruleCurrent['max-number'])
+        return;
+     
+      const ruleCurrentName = ruleCurrent.type;
+      const ruleCurrentPrice = ruleCurrent.price;
+      
+      contextObject.#cartGameControl.addItem(contextObject.#numbersGame, ruleCurrentPrice, ruleCurrentName);
     }
 
     #completeGame(contextObject) {
@@ -213,6 +231,11 @@
 
     setNumbersDiv(numbersDiv) {
       this.#numbersDiv = numbersDiv;
+      return this;
+    }
+
+    setCartGameControl(cartGameControl) {
+      this.#cartGameControl = cartGameControl;
       return this;
     }
 
