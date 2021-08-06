@@ -4,6 +4,7 @@ main .cart-game {
     /* background-color: rgb(236, 119, 119); */
     background-color: #FFF;
     border-radius: .625rem;
+    border: 1px solid #ccc;
 
     position: relative;
 }
