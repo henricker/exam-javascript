@@ -25,6 +25,10 @@
             }
             return str.concat(`${number},00`);
         }
+
+        static scrollToBottom(component) {
+            component.scrollTop = component.scrollHeight;
+        }
     }
     window.Util = Util;
 

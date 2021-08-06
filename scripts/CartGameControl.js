@@ -56,6 +56,7 @@
             this.#cartGameTotalP.innerHTML = `Total: ${Util.toReal(this.#totalValue)}`;
 
             imgGarbage.addEventListener('click', this.#onDeleteHandler.bind(imgGarbage, this));
+            Util.scrollToBottom(this.#cartGameItemsDiv);
         }
 
         #onDeleteHandler(contextObject) {

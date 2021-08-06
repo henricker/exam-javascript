@@ -23,8 +23,8 @@
             
 
         //Builder pattern
-        const modeGameButtonActive = new ModeGameButtonActive();
-        modeGameButtonActive
+        const gamePanelControl = new GamePanelControl();
+        gamePanelControl
             .setButtonLotoFacil(buttonLotoFacil)
             .setButtonMegaSena(buttonMegaSena)
             .setButtonLotoMania(buttonLotoMania)

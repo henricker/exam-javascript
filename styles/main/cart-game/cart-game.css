@@ -67,6 +67,7 @@ main .cart-game .items {
     display: flex;
     flex-direction: column;
     overflow-y: scroll;
+    scroll-behavior: smooth;
 }
 
 main .cart-game .items .item {
