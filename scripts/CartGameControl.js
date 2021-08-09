@@ -13,11 +13,12 @@
 
         setCartGameItemsDiv(cartGameItemsDiv) {
             this.#cartGameItemsDiv = cartGameItemsDiv;
+            this.#addEmptyCart();
             return this;
         }
 
         addItem(numbers, price, ruleCurrentName) {
-
+            this.#deleteEmptyCart();
             this.#totalValue += price;
 
             const classRuleGame = ruleCurrentName.toLowerCase().replace('-', '').replace('á', 'a');
@@ -64,6 +65,23 @@
             contextObject.#totalValue -= price;
             contextObject.#cartGameTotalP.innerHTML = `Total: ${Util.toReal(contextObject.#totalValue)}`;
             this.parentNode.remove();
+
+            if(contextObject.#cartGameItemsDiv.childNodes.length === 0)
+                contextObject.#addEmptyCart();
+        }
+
+        #addEmptyCart() {
+            this.#cartGameItemsDiv.style = 'justify-content: center';
+            this.#cartGameItemsDiv.innerHTML = '<p data-js="empty-cart" class="empty-cart"]><img src="assets/empty-cart.png"> Carrinho vazio</p>';        
+        }
+
+        #deleteEmptyCart() {
+            if(!document.querySelector('p[data-js="empty-cart"]'))
+                return;
+
+            this.#cartGameItemsDiv.style = 'justify-content: none';
+            const emptyCart = document.querySelector('p[data-js="empty-cart"]');
+            emptyCart.remove();
         }
     }
 

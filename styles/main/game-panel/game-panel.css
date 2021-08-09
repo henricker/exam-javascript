@@ -1,7 +1,6 @@
 .game-panel {
     width: 75%;
     padding-top: 1.5rem;
-    /* background-color: #7F3992; */
 }
 .game-panel .title-game {
     display: flex;

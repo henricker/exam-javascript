@@ -78,7 +78,7 @@
         contextObject.#numbersGame.length ===
         Number.parseInt(ruleGameCurr["max-number"])
       )
-        return;
+        contextObject.#clearGame.bind(contextObject.#clearGameButton, contextObject)();
 
       while (
         contextObject.#numbersGame.length <
