@@ -1,8 +1,5 @@
 ((window, document) => {
 
-    const buttonLotoFacil = document.querySelector('button[data-js="lotofacil-option"]');
-    const buttonMegaSena = document.querySelector('button[data-js="megasena-option"]');
-    const buttonLotoMania = document.querySelector('button[data-js="lotomania-option"');
     const completeGameButton = document.querySelector('button[data-js="complete-game-button"]');
     const clearGameButton = document.querySelector('button[data-js="clear-game-button"]');
     const cartGameButton = document.querySelector('button[data-js="cart-game-button"]');
@@ -11,7 +8,8 @@
     const cartGameTotalP = document.querySelector('p[data-js="cart-total"]');
     const cartGameItemsDiv = document.querySelector('div[data-js="cart-items"]');
     const gamePanel = document.querySelector('div[data-js="game-panel"]');
-
+    const saveGameButton = document.querySelector('.cart-game button');
+    
     function afterRequestHandler(e) {
         
         const typesRules = e.detail['types'];
@@ -20,22 +18,20 @@
         cartGameControl
             .setCartGameTotalP(cartGameTotalP)
             .setCartGameItemsDiv(cartGameItemsDiv)
+            .setSaveButton(saveGameButton);
             
 
         //Builder pattern
         const gamePanelControl = new GamePanelControl();
         gamePanelControl
-            .setButtonLotoFacil(buttonLotoFacil)
-            .setButtonMegaSena(buttonMegaSena)
-            .setButtonLotoMania(buttonLotoMania)
             .setCompleteGameButton(completeGameButton)
             .setClearGameButton(clearGameButton)
             .setCartGameButton(cartGameButton)
             .setTextRule(textRule)
             .setRulesGame(typesRules)
             .setNumbersDiv(numbersDiv)   
-            .setCartGameControl(cartGameControl)        
-            .onClick();
+            .setCartGameControl(cartGameControl)
+            .initialize();
     }
 
     

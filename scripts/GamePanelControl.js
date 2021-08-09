@@ -2,9 +2,6 @@
   "use-strict";
 
   class GamePanelControl {
-    #buttonLotofacil;
-    #buttonMegaSena;
-    #buttonLotoMania;
     #completeGameButton;
     #clearGameButton;
     #cartGameButton;
@@ -15,65 +12,20 @@
     #numbersGame;
     #cartGameControl;
 
-    onClick() {
-      this.#initialize();
-
-      this.#buttonLotoMania.addEventListener(
-        "click",
-        this.#handlerButtonActivate.bind(
-          this.#buttonLotoMania,
-          [this.#buttonLotofacil, this.#buttonMegaSena],
-          this
-        )
-      );
-      this.#buttonLotofacil.addEventListener(
-        "click",
-        this.#handlerButtonActivate.bind(
-          this.#buttonLotofacil,
-          [this.#buttonLotoMania, this.#buttonMegaSena],
-          this
-        )
-      );
-      this.#buttonMegaSena.addEventListener(
-        "click",
-        this.#handlerButtonActivate.bind(
-          this.#buttonMegaSena,
-          [this.#buttonLotofacil, this.#buttonLotoMania],
-          this
-        )
-      );
-      this.#completeGameButton.addEventListener(
-        "click",
-        this.#completeGame.bind(this.#completeGameButton, this)
-      );
-      this.#clearGameButton.addEventListener(
-        "click",
-        this.#clearGame.bind(this.#clearGameButton, this)
-      );
-      this.#cartGameButton.addEventListener(
-        "click",
-        this.#cartGame.bind(this.#cartGameButton, this)
-      );
-    }
-    
     #cartGame(contextObject) {
 
-      const ruleCurrent = contextObject.#getRuleCurrent(contextObject.#ruleGameCurrent);
+      const ruleCurrent = contextObject.#ruleGameCurrent;
 
       if(contextObject.#numbersGame.length < ruleCurrent['max-number'])
         return;
-     
-      const ruleCurrentName = ruleCurrent.type;
-      const ruleCurrentPrice = ruleCurrent.price;
+    
       
-      contextObject.#cartGameControl.addItem(contextObject.#numbersGame, ruleCurrentPrice, ruleCurrentName);
+      contextObject.#cartGameControl.addItem(contextObject.#numbersGame, contextObject.#ruleGameCurrent);
     }
 
     #completeGame(contextObject) {
-      const ruleGameCurr = contextObject.#getRuleCurrent(
-        contextObject.#ruleGameCurrent
-      );
-
+      const ruleGameCurr = contextObject.#ruleGameCurrent;
+   
       if (
         contextObject.#numbersGame.length ===
         Number.parseInt(ruleGameCurr["max-number"])
@@ -123,25 +75,11 @@
       contextObject.#numbersGame = [];
     }
 
-    #handlerButtonActivate(buttonsToRemoveActive, contextObject) {
-      this.classList.add("active");
-      buttonsToRemoveActive.forEach((button) =>
-        button.classList.remove("active")
-      );
-
-      const classControlActive = this.classList.value.replace(" ", "-");
-      contextObject.#numbersGame = [];
-      contextObject.#activateControlButtons(classControlActive);
-
-      contextObject.#ruleGameCurrent = this.innerHTML;
-      contextObject.#activateRules();
-    }
-
     #activateRules() {
-      const ruleGameCurr = this.#getRuleCurrent(this.#ruleGameCurrent);
-
-      this.#textRule.innerHTML = ruleGameCurr.description;
-      this.#activateButtonsNumbers(Number.parseInt(ruleGameCurr.range));
+      this.#textRule.innerHTML = this.#ruleGameCurrent.description;
+      this.#activateButtonsNumbers(Number.parseInt(this.#ruleGameCurrent.range));
+      this.#numbersGame = [];
+      this.#cartGameControl.setColorSaveButton(this.#ruleGameCurrent.color);
     }
 
     #activateButtonsNumbers(range) {
@@ -161,7 +99,7 @@
     }
 
     #buttonNumberActiveHandler(buttonContext) {
-      const ruleGameCurr = this.#getRuleCurrent(this.#ruleGameCurrent);
+      const ruleGameCurr = this.#ruleGameCurrent;
 
       if (buttonContext.classList.contains("active")) {
         buttonContext.classList.remove("active");
@@ -179,29 +117,51 @@
       }
     }
 
-    #activateControlButtons(activetedClass) {
-      this.#cartGameButton.classList.value = `cart-button ${activetedClass}`;
-      this.#clearGameButton.classList.value = `${activetedClass}`;
-      this.#completeGameButton.classList.value = `${activetedClass}`;
+    #activateControlButtons() {
+      this.#cartGameButton.style.backgroundColor = `${this.#ruleGameCurrent.color}`;
+      this.#cartGameButton.style.color = '#FFF';
+      this.#cartGameButton.style.border = 'none';
+
+      this.#clearGameButton.style.borderColor = `${this.#ruleGameCurrent.color}`;
+      this.#clearGameButton.style.color = `${this.#ruleGameCurrent.color}`;
+      this.#completeGameButton.style.borderColor = `${this.#ruleGameCurrent.color}`;
+      this.#completeGameButton.style.color = `${this.#ruleGameCurrent.color}`;
     }
 
-    #getRuleCurrent(ruleGame) {
-      return this.#rulesGame.find((rule) => rule.type === ruleGame);
+    #createbuttonByType(buttonProps) {
+      const button = document.createElement('button');
+      button.setAttribute('data-js', buttonProps.type);
+      this.#addStyleOnButtonType(button, buttonProps);
+      document.querySelector('div.mode').appendChild(button);
+      button.addEventListener('click', this.#activeButtonHandler.bind(this, button, buttonProps));
     }
 
-    setButtonLotoFacil(buttonLotoFacil) {
-      this.#buttonLotofacil = buttonLotoFacil;
-      return this;
+    #addStyleOnButtonType(button, buttonProps) {
+      button.style.marginLeft = '1rem';
+      button.style.border = `2px solid ${buttonProps.color}`;
+      button.style.padding = '.3rem 1.5rem';
+      button.style.borderRadius = '6.25rem';
+      button.style.cursor = 'pointer';
+      button.style.background = ' #FFFFFF 0% 0% no-repeat padding-box';
+      button.innerHTML = buttonProps.type;
+      button.style.color = `${buttonProps.color}`;
     }
 
-    setButtonMegaSena(buttonMegaSena) {
-      this.#buttonMegaSena = buttonMegaSena;
-      return this;
-    }
+    #activeButtonHandler(button, buttonProps) {
+      button.style.color = '#FFF';
+      button.style.border = 'none';
+      button.style.backgroundColor = `${buttonProps.color}`;
 
-    setButtonLotoMania(buttonLotoMania) {
-      this.#buttonLotoMania = buttonLotoMania;
-      return this;
+      const rulesWillBeDesatived = this.#rulesGame.filter(rule => rule.type !== buttonProps.type);
+
+      rulesWillBeDesatived.forEach(rule => {
+        const buttonRule = document.querySelector(`button[data-js="${rule.type}"]`);
+        this.#addStyleOnButtonType(buttonRule, rule);
+      }); 
+
+      this.#ruleGameCurrent = buttonProps;
+      this.#activateControlButtons();
+      this.#activateRules();
     }
 
     setCompleteGameButton(completeGameButton) {
@@ -239,11 +199,28 @@
       return this;
     }
 
-    #initialize() {
+    initialize() {
       this.#numbersGame = [];
-      this.#ruleGameCurrent = "Mega-Sena";
-      this.#activateRules("Mega-Sena");
-      this.#activateControlButtons("megasena-active");
+      this.#ruleGameCurrent = this.#rulesGame.find(rule => rule.type === 'Mega-Sena');
+      this.#activateRules();
+      this.#activateControlButtons();
+
+      this.#rulesGame.forEach(this.#createbuttonByType.bind(this));
+      const eventInitialize = new Event('click')
+      document.querySelector(`button[data-js="${this.#ruleGameCurrent.type}"]`).dispatchEvent(eventInitialize);
+
+      this.#completeGameButton.addEventListener(
+        "click",
+        this.#completeGame.bind(this.#completeGameButton, this)
+      );
+      this.#clearGameButton.addEventListener(
+        "click",
+        this.#clearGame.bind(this.#clearGameButton, this)
+      );
+      this.#cartGameButton.addEventListener(
+        "click",
+        this.#cartGame.bind(this.#cartGameButton, this)
+      );
     }
   }
 

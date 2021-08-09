@@ -95,32 +95,6 @@ main .cart-game .items .item .game-item .game-numbers, .price-game, .type-game {
     margin-left: .5rem;
 }
 
-main .cart-game .items .item .game-item.lotofacil {
-    border-left: 2px solid #7F3992;
-}
-
-main .cart-game .items .item .game-item.megasena {
-    border-left: 2px solid #01AC66;
-}
-
-main .cart-game .items .item .game-item.lotomania {
-    border-left: 2px solid #F79C31;
-}
-
-main .cart-game .items .item .game-item .type-game.lotomania {
-    color: #F79C31;
-}
-
-main .cart-game .items .item .game-item .type-game.lotofacil {
-    color: #7F3992;
-}
-
-main .cart-game .items .item .game-item .type-game.megasena {
-    color: #01AC66;
-}
-
-
-
 main .cart-game .items .item .game-item .game-numbers{
     width: 100%;
     font-size: .6rem;

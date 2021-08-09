@@ -4,6 +4,7 @@
     class CartGameControl {
         #cartGameTotalP;
         #cartGameItemsDiv;
+        #saveButton;
         #totalValue = 0;
 
         setCartGameTotalP(cartGameTotalP) {
@@ -17,37 +18,47 @@
             return this;
         }
 
-        addItem(numbers, price, ruleCurrentName) {
-            this.#deleteEmptyCart();
-            this.#totalValue += price;
+        setSaveButton(saveButton) {
+            this.#saveButton = saveButton;
+            return this;
+        }
 
-            const classRuleGame = ruleCurrentName.toLowerCase().replace('-', '').replace('á', 'a');
+        setColorSaveButton(color) {
+            this.#saveButton.style.color = `${color}`;
+            this.#saveButton.childNodes[1].setAttribute('fill', color);
+        }
+
+        addItem(numbers, ruleCurrent) {
+            this.#deleteEmptyCart();
+            this.#totalValue += ruleCurrent.price;
 
             const itemDiv = document.createElement('div');
             itemDiv.classList.value = 'item';
-            itemDiv.setAttribute('data-js', price);
+            itemDiv.setAttribute('data-js', ruleCurrent.price);
             
             const imgGarbage = document.createElement('img');
             imgGarbage.src='assets/garbage.svg';
 
             const gameItemDiv = document.createElement('div');
-            gameItemDiv.classList.value = `game-item ${classRuleGame}`;
+            gameItemDiv.classList.value = `game-item`;
 
             const pNumbers = document.createElement('p');
             pNumbers.classList.value = 'game-numbers';
             pNumbers.innerHTML = numbers.join(', ');
 
             const spanType = document.createElement('span');
-            spanType.classList.value = `type-game ${classRuleGame}`;
-            spanType.innerHTML = ruleCurrentName;
+            spanType.classList.value = `type-game`;
+            spanType.innerHTML = ruleCurrent.type;
+            spanType.style.color = `${ruleCurrent.color}`;
 
             const spanPrice = document.createElement('span');
             spanPrice.classList.value = 'price-game';
-            spanPrice.innerHTML = Util.toReal(price);
+            spanPrice.innerHTML = Util.toReal(ruleCurrent.price);
 
             gameItemDiv.appendChild(pNumbers);
             gameItemDiv.appendChild(spanType);
             gameItemDiv.appendChild(spanPrice);
+            gameItemDiv.style.borderLeft = `2px solid ${ruleCurrent.color}`;
 
             itemDiv.appendChild(imgGarbage);
             itemDiv.appendChild(gameItemDiv);

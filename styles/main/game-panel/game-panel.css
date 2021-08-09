@@ -30,49 +30,6 @@
     display: flex;
 }
 
-/* Buttons */
-.game-panel .choose-game .mode button {
-    margin-right: 1rem;
-    border: 2px solid;
-    padding: .3rem 1.5rem;
-    border-radius: 6.25rem;
-    cursor: pointer;
-    background: #FFFFFF 0% 0% no-repeat padding-box;
-    font-weight: 500;
-}
-
-.game-panel .choose-game .mode button.lotofacil {
-    border: 2px solid #7F3992;
-    color: #7F3992;
-}
-
-.game-panel .choose-game .mode button.megasena {
-    border: 2px solid #01AC66;
-    color: #01AC66;
-}
-
-.game-panel .choose-game .mode button.lotomania {
-    border: 2px solid #F79C31;
-    color: #F79C31;
-}
-
-.game-panel .choose-game .mode button.lotofacil.active {
-    background-color: #7F3992;
-    border: none;
-    color: #FFF;
-}
-
-.game-panel .choose-game .mode button.megasena.active {
-    background-color: #01AC66;
-    border: none;
-    color: #FFF;
-}
-
-.game-panel .choose-game .mode button.lotomania.active {
-    background-color: #F79C31;
-    border: none;
-    color: #FFF;
-}
 
 /* rules */
 
@@ -139,36 +96,7 @@
     align-items: center;
     padding: .2rem 2rem;
     margin-right: 5%;
-}
-
-.game-panel .controls button.lotofacil-active {
-    border-color: #7F3992;
-    color: #7F3992;
-}
-
-.game-panel .controls button.megasena-active {
-    border-color: #01AC66;
-    color: #01AC66;
-}
-
-.game-panel .controls button.lotomania-active {
-    border-color: #F79C31;
-    color: #F79C31;
-}
-
-.game-panel .controls .cart-button.lotofacil-active {
-  color: #FFF;
-  background-color: #7F3992;
-}
-
-.game-panel .controls .cart-button.megasena-active {
     color: #FFF;
-    background-color: #01AC66;
-}
-
-.game-panel .controls .cart-button.lotomania-active {
-    color: #FFF;
-    background-color: #F79C31;
 }
 
 @media screen and (max-width: 1100px) {
